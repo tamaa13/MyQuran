@@ -6,7 +6,7 @@ const baseUrl = 'http://localhost:3000'
 
 export const useMainStore = defineStore('main', {
   state: () => ({
-
+    modalData: {}
   }),
   actions: {
     async login(input) {
@@ -51,5 +51,21 @@ export const useMainStore = defineStore('main', {
         })
       }
     },
+    async modal() {
+      try {
+        const { data } = await axios.get(`${baseUrl}/bot`, {
+          headers: {
+            access_token: localStorage.access_token
+          }
+        })
+        this.modalData = data
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${err.response.data.message}`
+        })
+      }
+    }
   }
 })

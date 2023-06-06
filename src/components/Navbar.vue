@@ -12,7 +12,7 @@ export default {
 <template>
     <div class="navbar bg-base-300">
         <div class="flex-1">
-            <a class="btn btn-ghost normal-case text-xl">MyQuran</a>
+            <a @click.prevent="this.$router.push('/')" class="btn btn-ghost normal-case text-xl">MyQuran</a>
         </div>
         <div class="flex-none">
             <div class="dropdown dropdown-end">
@@ -48,4 +48,5 @@ export default {
             </div>
         </div>
     </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#D4BF87" fill-opacity="1" d="M0,160L48,181.3C96,203,192,245,288,272C384,299,480,309,576,288C672,267,768,213,864,208C960,203,1056,245,1152,224C1248,203,1344,117,1392,74.7L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>
 </template>
