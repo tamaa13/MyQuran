@@ -25,4 +25,18 @@ const router = createRouter({
   ]
 })
 
+router.beforeEach((to, from, next) => {
+  if (localStorage.access_token && to.name === 'login') {
+    next({ name: 'home' });
+  } else if (!localStorage.access_token && to.name === 'login') {
+    next(); // Continue with the navigation
+  } else if (!localStorage.access_token && to.name === 'register') {
+    next(); // Continue with the navigation
+  } else if (localStorage.access_token && to.name === 'register') {
+    next({ name: 'home' }); // Continue with the navigation for other cases
+  } else {
+    next()
+  }
+});
+
 export default router
