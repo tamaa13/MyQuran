@@ -15,7 +15,7 @@ export const useMainStore = defineStore('main', {
 
         localStorage.access_token = data.access_token
         this.isLogin = true
-        // this.router.push('/')
+        this.router.push('/')
         Swal.fire({
           position: 'top-end',
           icon: 'success',
