@@ -1,12 +1,17 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { ListGroup } from 'flowbite-react'
 
 const baseUrl = 'http://localhost:3000'
 
 export const useMainStore = defineStore('main', {
   state: () => ({
-    modalData: {}
+    modalData: {},
+    surah: {},
+    details: {},
+    idDetail: 0,
+    sounds: {}
   }),
   actions: {
     async login(input) {
@@ -59,6 +64,43 @@ export const useMainStore = defineStore('main', {
           }
         })
         this.modalData = data
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${err.response.data.message}`
+        })
+      }
+    },
+    async fetchSurah() {
+      try {
+        const { data } = await axios.get(`${baseUrl}/quran`, { headers: { access_token: localStorage.access_token } })
+        this.surah = data.chapters
+        localStorage.detailId = data.chapters
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${err.response.data.message}`
+        })
+      }
+    },
+    async fetchDetail(id) {
+      try {
+        const { data } = await axios.get(`${baseUrl}/quran/${id}`, { headers: { access_token: localStorage.access_token } })
+        this.details = data.verses
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${err.response.data.message}`
+        })
+      }
+    },
+    async fetchSound(id) {
+      try {
+        const { data } = await axios.get(`${baseUrl}/quran/sounds/${id}`, { headers: { access_token: localStorage.access_token } })
+        this.sounds = data.audio_file
       } catch (err) {
         Swal.fire({
           icon: 'error',
