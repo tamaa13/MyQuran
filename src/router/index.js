@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import HomeView from '@/views/HomeView.vue'
+import DetailView from '@/views/DetailView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,21 +23,23 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
+    {
+      path: '/:id',
+      name: 'detail',
+      component: DetailView
+    },
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  if (localStorage.access_token && to.name === 'login') {
-    next({ name: 'home' });
-  } else if (!localStorage.access_token && to.name === 'login') {
-    next(); // Continue with the navigation
-  } else if (!localStorage.access_token && to.name === 'register') {
-    next(); // Continue with the navigation
-  } else if (localStorage.access_token && to.name === 'register') {
-    next({ name: 'home' }); // Continue with the navigation for other cases
+  if (localStorage.access_token && (to.name === 'login' || to.name === 'register')) {
+    next({ name: 'home' }); // Redirect to home page
+  } else if (!localStorage.access_token && to.name !== 'login' && to.name !== 'register') {
+    next({ name: 'login' }); // Redirect to login page
   } else {
-    next()
+    next(); // Continue with the navigation
   }
 });
+
 
 export default router

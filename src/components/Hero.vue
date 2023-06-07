@@ -19,13 +19,12 @@ export default {
 
 <template>
     <div
-        class="hero w-11/12 bg-base-300 flex mx-auto skew-y-3 mt-32 rounded-md drop-shadow-2xl animate__animated animate__zoomInRight">
+        class="hero w-11/12 bg-base-300 flex mx-auto hover:scale-105 mt-32 rounded-md drop-shadow-2xl animate__animated animate__zoomInRight">
         <div class="hero-content flex-col lg:flex-row-reverse">
             <div>
                 <h1 class="text-5xl font-bold">Butuh kata-kata mutiara ?</h1>
                 <p class="py-6">{{ modalData.result }}</p>
-                <button class="btn" @click.prevent="modal()">Kata-Kata buat kamu</button>
-                <Loader/>
+                <button class="btn btn-primary" @click.prevent="modal()">Kata-Kata buat kamu</button>
             </div>
         </div>
     </div>

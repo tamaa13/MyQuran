@@ -30,9 +30,9 @@ export default {
                     kehidupan kita. Dengan mengaji, kita
                     akan memperoleh hikmah, kebijaksanaan, dan petunjuk dari Allah yang tak ternilai harganya.</p>
             </div>
-            <form @submit.prevent="login(input)" action="">
+            <form @submit.prevent="login(input)" action="" class="hover:scale-105">
                 <div
-                    class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 animate__animated animate__slideInLeft">
+                    class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 animate__animated animate__slideInLeft ">
                     <div class="card-body">
                         <div class="form-control">
                             <label class="label">
